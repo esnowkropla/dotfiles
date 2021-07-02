@@ -93,7 +93,7 @@ set cursorline
 set hidden
 set nocompatible
 " don't clear the screen on exit
-" set t_ti= t_te=
+set t_ti= t_te=
 set nobackup
 set nowritebackup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
