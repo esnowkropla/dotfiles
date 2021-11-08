@@ -97,4 +97,6 @@ source /usr/local/share/chruby/chruby.sh
 chruby ruby-2.7.2
 source /usr/local/share/chruby/auto.sh
 
+alias ds="df -h | grep home$ | tr -s ' ' | cut -d ' ' -f 4"
+
 export PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\u@\h\[${NORMAL}\]:\[${BRIGHT_BLUE}\]\w\[${NORMAL}\]\[${CYAN}\]\$(__git_ps1)\[${NORMAL}\]\$ "
