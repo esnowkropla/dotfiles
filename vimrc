@@ -189,9 +189,11 @@ let g:ale_elixir_elixir_ls_release=expand('~/work/elixir-ls/release')
 let g:ale_linters = {
 \ 'elixir': ['mix', 'elixir-ls'],
 \ 'python': ['flake8'],
-\ 'bash': ['shellcheck']
+\ 'bash': ['shellcheck'],
+\ 'javascript': ['eslint'],
 \}
 
 let g:ale_fixers = {
 \ 'elixir': ['mix_format'],
+\ 'javascript': ['eslint'],
 \}
