@@ -33,6 +33,9 @@ Plug 'preservim/nerdtree'
 " Beancount
 Plug 'nathangrigg/vim-beancount'
 
+" Comment motion
+Plug 'tpope/vim-commentary'
+
 call plug#end()
 
 " Syntax highlighting and colour
