@@ -185,7 +185,8 @@ endfunction
 let g:ale_elixir_elixir_ls_release=expand('~/work/elixir-ls/release')
 let g:ale_linters = {
 \ 'elixir': ['mix', 'elixir-ls'],
-\ 'python': ['flake8']
+\ 'python': ['flake8'],
+\ 'bash': ['shellcheck']
 \}
 
 let g:ale_fixers = {
