@@ -190,7 +190,8 @@ let g:ale_linters = {
 \ 'elixir': ['mix', 'elixir-ls'],
 \ 'python': ['flake8'],
 \ 'bash': ['shellcheck'],
-\ 'javascript': ['standard']
+\ 'javascript': ['standard'],
+\ 'beancount': ['bean_check']
 \}
 
 let g:ale_fixers = {
