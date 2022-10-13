@@ -108,7 +108,9 @@ set shiftwidth=2
 set softtabstop=2
 " display incomplete commands
 set showcmd
-"
+
+autocmd FileType beancount setlocal shiftwidth=4 tabstop=4 softtabstop=4
+
 " My key mappings (many stolen form grb)
 let mapleader = ","
 nnoremap <leader><leader> <c-^>
