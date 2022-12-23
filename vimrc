@@ -36,6 +36,8 @@ Plug 'nathangrigg/vim-beancount'
 " Comment motion
 Plug 'tpope/vim-commentary'
 
+Plug 'chaimleib/vim-renpy'
+
 call plug#end()
 
 " Syntax highlighting and colour
@@ -111,7 +113,7 @@ set showcmd
 
 autocmd FileType beancount setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
-" My key mappings (many stolen form grb)
+" My key mappings (many stolen from grb)
 let mapleader = ","
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>m :GFiles<CR>
@@ -145,7 +147,7 @@ function! RunTestFile(...)
         let command_suffix = ""
     endif
 
-    let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\)$') != -1
+    let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\)$') != -1
 
     if in_test_file
         call SetTestFile(command_suffix)
