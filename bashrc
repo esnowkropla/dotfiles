@@ -94,7 +94,7 @@ bind '"\e[B": history-search-forward'
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 source /usr/local/share/chruby/chruby.sh
-chruby ruby-2.7.2
+chruby ruby-3.1.2
 source /usr/local/share/chruby/auto.sh
 
 alias ds="df -h | grep home$ | tr -s ' ' | cut -d ' ' -f 4"
