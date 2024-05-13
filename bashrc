@@ -94,8 +94,14 @@ bind '"\e[B": history-search-forward'
 export ERL_AFLAGS="-kernel shell_history enabled"
 
 source /usr/local/share/chruby/chruby.sh
-chruby ruby-3.1.2
+chruby ruby-3.2.2
 source /usr/local/share/chruby/auto.sh
+
+export FLYCTL_INSTALL="/home/ejsk/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+. "$HOME/.asdf/asdf.sh"
+. "$HOME/.asdf/completions/asdf.bash"
 
 alias ds="df -h | grep home$ | tr -s ' ' | cut -d ' ' -f 4"
 

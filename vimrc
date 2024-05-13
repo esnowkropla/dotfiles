@@ -67,6 +67,8 @@ let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
 
+let g:ale_ruby_rubocop_auto_correct_all = 1
+
 " incsearch stuff
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -199,6 +201,8 @@ let g:ale_linters = {
 \}
 
 let g:ale_fixers = {
+\ '*': ['remove_trailing_lines', 'trim_whitespace'],
 \ 'elixir': ['mix_format'],
-\ 'javascript': ['standard']
+\ 'javascript': ['standard'],
+\ 'ruby': ['rubocop']
 \}
