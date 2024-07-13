@@ -73,8 +73,6 @@ let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
 
-let g:ale_ruby_rubocop_auto_correct_all = 1
-
 " incsearch stuff
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -119,6 +117,9 @@ set softtabstop=2
 " display incomplete commands
 set showcmd
 
+set foldmethod=syntax
+set foldlevel=20
+
 autocmd BufNewFile,BufRead *.heex set syntax=eelixir
 autocmd FileType beancount setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
@@ -132,6 +133,9 @@ nnoremap <leader>T :call RunTests('')<CR>
 nnoremap <leader>h :ALEHover<CR>
 nnoremap <leader>f :Ag<CR>
 nnoremap <leader>d :ALEGoToDefinition<CR>
+
+inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 cnoremap <expr> %% expand('%:h').'/'
 
@@ -282,5 +286,6 @@ let g:ale_fixers = {
 \ 'elixir': ['mix_format'],
 \ 'javascript': ['standard'],
 \ 'ruby': ['rubocop'],
-\ 'rust': ['rustfmt']
+\ 'rust': ['rustfmt'],
+\ 'bash': ['shfmt']
 \}
