@@ -1,0 +1,3 @@
+#! /bin/bash
+
+llm -s "Explain the following code" "$@"

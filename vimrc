@@ -38,11 +38,17 @@ Plug 'tpope/vim-commentary'
 
 Plug 'chaimleib/vim-renpy'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
 call plug#end()
 
 " Syntax highlighting and colour
 syntax on
 set background=dark
+
+" Set the shell to my bash login shell
+set shell=bash\ --login
 
 "let g:solarized_termcolors=256
 "let g:solarized_termtrans = 1
@@ -113,6 +119,7 @@ set softtabstop=2
 " display incomplete commands
 set showcmd
 
+autocmd BufNewFile,BufRead *.heex set syntax=eelixir
 autocmd FileType beancount setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " My key mappings (many stolen from grb)
@@ -124,6 +131,7 @@ nnoremap <leader>t :call RunNearestTest()<CR>
 nnoremap <leader>T :call RunTests('')<CR>
 nnoremap <leader>h :ALEHover<CR>
 nnoremap <leader>f :Ag<CR>
+nnoremap <leader>d :ALEGoToDefinition<CR>
 
 cnoremap <expr> %% expand('%:h').'/'
 
@@ -131,6 +139,74 @@ map <c-h> <c-w>h
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
+
+function! Explain()
+    " Remember the current window ID
+    let l:current_win = win_getid()
+
+    " Get the visually selected text
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+
+    " Adjust the last line to consider only the selected part
+    if len(lines) > 0
+        let lines[-1] = lines[-1][:column_end - (&selection == 'inclusive' ? 1 : 2)]
+        let lines[0] = lines[0][column_start - 1:]
+    endif
+
+    " Join the lines
+    let selected_text = join(lines, "\n")
+
+    let escaped_text = shellescape(selected_text, 1)
+    " Prepare the shell script command with the selected text as input
+    let cmd = [expand("~/bin/llm-explain"), escaped_text]
+
+    " Create a new split
+    new
+
+    " Set the buffer to modifiable
+    setlocal modifiable
+
+    " Set a custom buffer name
+    execute "file LLM-Explain-Result"
+
+    " Mark the buffer as not needing to be saved
+    setlocal buftype=nofile
+    setlocal noswapfile
+    setlocal nomodified
+    setlocal bufhidden=wipe
+
+    " Store the buffer number
+    let s:explain_buf = bufnr('%')
+
+    " Start the job asynchronously
+    let s:job = job_start(cmd, {
+        \ 'out_io': 'buffer',
+        \ 'out_buf': s:explain_buf,
+        \ 'out_modifiable': 1,
+        \ 'close_cb': function('ExplainJobClose'),
+        \ 'pty': 1
+        \ })
+
+    if job_status(s:job) == "fail"
+        echoerr "Failed to start job"
+        return
+    endif
+
+    " Switch back to the original window
+    call win_gotoid(l:current_win)
+endfunction
+
+function! ExplainJobClose(channel)
+    " Set the buffer to read-only when the job is done
+    call setbufvar(s:explain_buf, '&modifiable', 0)
+    call setbufvar(s:explain_buf, '&modified', 0)
+    echom "Explanation complete!"
+endfunction
+
+" Map the function to a key in Visual mode
+vnoremap <Leader>e :<C-U>call Explain()<CR>
 
 nnoremap gj :ALENextWrap<cr>
 nnoremap gk :ALEPreviousWrap<cr>
@@ -149,7 +225,7 @@ function! RunTestFile(...)
         let command_suffix = ""
     endif
 
-    let in_test_file = match(expand("%"), '\(_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\)$') != -1
+    let in_test_file = match(expand("%"), '\(_test.rs\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\)$') != -1
 
     if in_test_file
         call SetTestFile(command_suffix)
@@ -197,12 +273,14 @@ let g:ale_linters = {
 \ 'python': ['flake8'],
 \ 'bash': ['shellcheck'],
 \ 'javascript': ['standard'],
-\ 'beancount': ['bean_check']
+\ 'beancount': ['bean_check'],
+\ 'rust': ['cargo', 'analyzer']
 \}
 
 let g:ale_fixers = {
 \ '*': ['remove_trailing_lines', 'trim_whitespace'],
 \ 'elixir': ['mix_format'],
 \ 'javascript': ['standard'],
-\ 'ruby': ['rubocop']
+\ 'ruby': ['rubocop'],
+\ 'rust': ['rustfmt']
 \}
