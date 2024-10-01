@@ -1,7 +1,10 @@
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
+
+" Colors
 Plug 'altercation/vim-colors-solarized'
+Plug 'ghifarit53/tokyonight-vim'
 
 " Elixir
 Plug 'elixir-editors/vim-elixir'
@@ -58,8 +61,8 @@ set shell=bash\ --login
 "set termguicolors
 let g:tokyonight_style = 'night'
 
-colorscheme solarized
-"colorscheme tokyonight
+"colorscheme solarized
+colorscheme tokyonight
 
 highlight clear SignColumn
 highlight clear LineNr
