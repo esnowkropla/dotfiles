@@ -1,3 +1,3 @@
 #! /bin/bash
 
-llm -s "Explain the following code" "$@"
+llm -s "Answer in as few words as possible.  Use a brief style with short replies.  Explain the following code" "$@"
