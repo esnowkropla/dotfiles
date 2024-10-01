@@ -1,5 +1,9 @@
-import = [
-  "~/.config/alacritty/themes/themes/solarized_dark.toml"
+#import = [
+#  "~/.config/alacritty/themes/themes/solarized_dark.toml",
+#]
+
+import =[
+  "~/.config/alacritty/themes/themes/tokyo-night.html"
 ]
 
 [env]
