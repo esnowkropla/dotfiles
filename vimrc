@@ -55,7 +55,11 @@ set shell=bash\ --login
 "let g:solarized_visibility = "high"
 "let g:solarized_contrast = "high"
 
+"set termguicolors
+let g:tokyonight_style = 'night'
+
 colorscheme solarized
+"colorscheme tokyonight
 
 highlight clear SignColumn
 highlight clear LineNr
