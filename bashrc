@@ -99,7 +99,7 @@ source /usr/local/share/chruby/auto.sh
 
 export EDITOR=vim
 export FLYCTL_INSTALL="/home/ejsk/.fly"
-export PATH="$HOME/.local/maelstrom:$FLYCTL_INSTALL/bin:$PATH"
+export PATH="$HOME/.local/maelstrom:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
 
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
 
