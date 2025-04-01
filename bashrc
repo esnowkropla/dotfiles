@@ -91,15 +91,13 @@ eval "$(dircolors ~/.dir_colors/dircolors)"
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
-export ERL_AFLAGS="-kernel shell_history enabled"
+export ASDF_DATA_DIR="/home/ejsk/.asdf"
 
-source /usr/local/share/chruby/chruby.sh
-chruby ruby-3.3.1
-source /usr/local/share/chruby/auto.sh
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 export EDITOR=vim
 export FLYCTL_INSTALL="/home/ejsk/.fly"
-export PATH="$HOME/.local/maelstrom:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
+export PATH="$ASDF_DATA_DIR/shims:$HOME/.local/maelstrom:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
 
 export HSA_OVERRIDE_GFX_VERSION=10.3.0
 
@@ -107,6 +105,4 @@ alias ds="df -h | grep home$ | tr -s ' ' | cut -d ' ' -f 4"
 
 export PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\u@\h\[${NORMAL}\]:\[${BRIGHT_BLUE}\]\w\[${NORMAL}\]\[${CYAN}\]\$(__git_ps1)\[${NORMAL}\]\$ "
 
-. "$HOME/.asdf/asdf.sh"
 . "$HOME/.cargo/env"
-. "$HOME/.asdf/completions/asdf.bash"
