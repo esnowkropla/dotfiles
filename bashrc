@@ -103,6 +103,10 @@ export HSA_OVERRIDE_GFX_VERSION=10.3.0
 
 alias ds="df -h | grep home$ | tr -s ' ' | cut -d ' ' -f 4"
 
+alias pbcopy='xclip -selection clipboard -i'
+alias pbfilter='xclip -selection clipboard -f'
+alias pbpaste='xclip -selection clipboard -o'
+
 export PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\u@\h\[${NORMAL}\]:\[${BRIGHT_BLUE}\]\w\[${NORMAL}\]\[${CYAN}\]\$(__git_ps1)\[${NORMAL}\]\$ "
 
 . "$HOME/.cargo/env"
