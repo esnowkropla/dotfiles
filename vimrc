@@ -44,6 +44,9 @@ Plug 'chaimleib/vim-renpy'
 " Rust
 Plug 'rust-lang/rust.vim'
 
+" Crystal
+Plug 'vim-crystal/vim-crystal'
+
 call plug#end()
 
 " Syntax highlighting and colour
@@ -79,6 +82,8 @@ let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
+
+let g:ale_crystal_ameba_executable = '/usr/local/bin/ameba'
 
 " incsearch stuff
 map /  <Plug>(incsearch-forward)
@@ -128,6 +133,7 @@ set foldmethod=syntax
 set foldlevel=20
 
 autocmd BufNewFile,BufRead *.heex set syntax=eelixir
+autocmd BufNewFile,BufRead *.gleam set syntax=gleam
 autocmd FileType beancount setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " My key mappings (many stolen from grb)
@@ -236,7 +242,7 @@ function! RunTestFile(...)
         let command_suffix = ""
     endif
 
-    let in_test_file = match(expand("%"), '\(_test.rs\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\)$') != -1
+    let in_test_file = match(expand("%"), '\(_test.rs\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\|_test.gleam\)$') != -1
 
     if in_test_file
         call SetTestFile(command_suffix)
@@ -293,7 +299,8 @@ let g:ale_linters = {
 \ 'bash': ['shellcheck'],
 \ 'javascript': ['standard'],
 \ 'beancount': ['bean_check'],
-\ 'rust': ['cargo', 'analyzer']
+\ 'rust': ['cargo', 'analyzer'],
+\ 'gleam': ['gleamlsp']
 \}
 
 let g:ale_fixers = {
