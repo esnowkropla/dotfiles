@@ -44,9 +44,12 @@ Plug 'chaimleib/vim-renpy'
 " Rust
 Plug 'rust-lang/rust.vim'
 
-" Devdocs
+" Crystal
+Plug 'vim-crystal/vim-crystal'
 
+" Devdocs
 Plug 'girishji/devdocs.vim'
+
 call plug#end()
 
 " Syntax highlighting and colour
@@ -82,6 +85,8 @@ let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
+
+let g:ale_crystal_ameba_executable = '/usr/local/bin/ameba'
 
 " incsearch stuff
 map /  <Plug>(incsearch-forward)
@@ -132,6 +137,7 @@ set foldmethod=syntax
 set foldlevel=20
 
 autocmd BufNewFile,BufRead *.heex set syntax=eelixir
+autocmd BufNewFile,BufRead *.gleam set syntax=gleam
 autocmd FileType beancount setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " My key mappings (many stolen from grb)
@@ -243,7 +249,7 @@ function! RunTestFile(...)
         let command_suffix = ""
     endif
 
-    let in_test_file = match(expand("%"), '\(_test.rs\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\|_test.go\)$') != -1
+    let in_test_file = match(expand("%"), '\(_test.rs\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\|_test.gleam\|_test.go\)$') != -1
 
     if in_test_file
         call SetTestFile(command_suffix)
@@ -302,6 +308,7 @@ let g:ale_linters = {
 \ 'typescript': ['eslint', 'tsserver'],
 \ 'beancount': ['bean_check'],
 \ 'rust': ['cargo', 'analyzer'],
+\ 'gleam': ['gleamlsp'],
 \ 'go': ['gopls', 'golangci-lint']
 \}
 
@@ -313,6 +320,8 @@ let g:ale_fixers = {
 \ 'ruby': ['rubocop'],
 \ 'rust': ['rustfmt'],
 \ 'bash': ['shfmt'],
+\ 'gleam': ['gleam_format'],
+\ 'zig': ['zigfmt'],
 \ 'go': ['gofmt'],
 \ 'python': ['black']
 \}
