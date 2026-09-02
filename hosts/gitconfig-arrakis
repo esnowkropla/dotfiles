@@ -1,5 +1,9 @@
-# Git identity for arrakis. Symlink to ~/.gitconfig.local; pulled in by [include] in ../gitconfig.
+# Git identity and host-specific git settings for arrakis. Symlink to ~/.gitconfig.local; pulled in by [include] in ../gitconfig.
 [user]
 	email = elliot.snow-kropla@joinliora.com
 	name = Elliot Snow-Kropla
 	signingkey = C17E1306AE407927
+
+# Work repos are cloned over ssh even when given an https URL
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
