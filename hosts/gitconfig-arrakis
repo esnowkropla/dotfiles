@@ -1,0 +1,5 @@
+# Git identity for arrakis. Symlink to ~/.gitconfig.local; pulled in by [include] in ../gitconfig.
+[user]
+	email = elliot.snow-kropla@joinliora.com
+	name = Elliot Snow-Kropla
+	signingkey = C17E1306AE407927

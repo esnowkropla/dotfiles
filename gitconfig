@@ -1,7 +1,6 @@
-[user]
-	email = elliot.snow-kropla@joinliora.com
-	name = Elliot Snow-Kropla
-	signingkey = C17E1306AE407927
+# Identity (email, signing key) is per-machine: see hosts/README.md
+[include]
+	path = ~/.gitconfig.local
 
 [url "ssh://git@github.com/"]
   insteadOf = https://github.com/

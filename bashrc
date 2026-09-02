@@ -97,11 +97,9 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 export EDITOR=vim
 export FLYCTL_INSTALL="/home/ejsk/.fly"
-export PATH="$(go env GOPATH)/bin:$HOME/.pulumi-bin:$ASDF_DATA_DIR/shims:$HOME/bin:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
+export PATH="$ASDF_DATA_DIR/shims:$HOME/bin:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
 
 alias ds="df -h | grep home$ | tr -s ' ' | cut -d ' ' -f 4"
-
-alias ipm="ipython --pylab"
 
 alias pbcopy='xclip -selection clipboard -i'
 alias pbfilter='xclip -selection clipboard -f'
@@ -112,3 +110,7 @@ export PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\u@\h\[${NORMAL}\]:\[${
 . "$HOME/.cargo/env"
 
 export GPG_TTY=$(tty)
+
+# Host-specific settings: hosts/<hostname>.sh in this repo, if present.
+DOTFILES_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
+[ -r "$DOTFILES_DIR/hosts/$(hostname -s).sh" ] && . "$DOTFILES_DIR/hosts/$(hostname -s).sh"
