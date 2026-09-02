@@ -29,3 +29,15 @@ fi
 export GPG_TTY=$(tty)
 export MOZ_USE_XINPUT2=1
 . "$HOME/.cargo/env"
+
+export MGFXC_WINE_PATH="/home/ejsk/.winemonogame"
+
+export PATH="$PATH:/home/ejsk/.winemonogame"
+
+export MGFXC_WINE_PATH="/home/ejsk/.winemonogame"
+
+export PATH="$PATH:/home/ejsk/.winemonogame"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/ejsk/.local/bin:$PATH"

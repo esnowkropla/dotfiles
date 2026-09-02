@@ -276,8 +276,16 @@ endfunction
 
 " Elixir
 let g:ale_elixir_elixir_ls_release=expand('~/work/elixir-ls/release')
+call ale#linter#Define('elixir', {
+\   'name': 'dexter',
+\   'lsp': 'stdio',
+\   'executable': 'dexter',
+\   'command': 'dexter lsp',
+\   'project_root': {buffer -> ale#path#FindNearestFile(buffer, 'mix.exs')      },
+\})
+
 let g:ale_linters = {
-\ 'elixir': ['mix', 'elixir-ls'],
+\ 'elixir': ['mix', 'dexter'],
 \ 'python': ['flake8'],
 \ 'bash': ['shellcheck'],
 \ 'javascript': ['standard'],
@@ -291,5 +299,7 @@ let g:ale_fixers = {
 \ 'javascript': ['standard'],
 \ 'ruby': ['rubocop'],
 \ 'rust': ['rustfmt'],
-\ 'bash': ['shfmt']
+\ 'bash': ['shfmt'],
+\ 'gleam': ['gleam_format'],
+\ 'zig': ['zigfmt']
 \}

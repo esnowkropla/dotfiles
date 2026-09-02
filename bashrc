@@ -110,3 +110,10 @@ alias pbpaste='xclip -selection clipboard -o'
 export PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\u@\h\[${NORMAL}\]:\[${BRIGHT_BLUE}\]\w\[${NORMAL}\]\[${CYAN}\]\$(__git_ps1)\[${NORMAL}\]\$ "
 
 . "$HOME/.cargo/env"
+
+# opencode
+export PATH=/home/ejsk/.opencode/bin:$PATH
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/ejsk/.local/bin:$PATH"
