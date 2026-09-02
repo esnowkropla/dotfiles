@@ -1,3 +1,9 @@
 #! /bin/bash
 
+# args="/no_think "
+# for arg in "$@"; do
+    # args="$args $arg"
+# done
+
+# llm -m qwen3:4b -s "Answer in as few words as possible.  Use a brief style with short replies.  Explain the following code" "$args"
 llm -s "Answer in as few words as possible.  Use a brief style with short replies.  Explain the following code" "$@"

@@ -97,9 +97,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 export EDITOR=vim
 export FLYCTL_INSTALL="/home/ejsk/.fly"
-export PATH="$ASDF_DATA_DIR/shims:$HOME/.local/maelstrom:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
-
-export HSA_OVERRIDE_GFX_VERSION=10.3.0
+export PATH="$ASDF_DATA_DIR/shims:$HOME/bin:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
 
 alias ds="df -h | grep home$ | tr -s ' ' | cut -d ' ' -f 4"
 
@@ -111,9 +109,8 @@ export PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\u@\h\[${NORMAL}\]:\[${
 
 . "$HOME/.cargo/env"
 
-# opencode
-export PATH=/home/ejsk/.opencode/bin:$PATH
+export GPG_TTY=$(tty)
 
-
-# Added by Antigravity CLI installer
-export PATH="/home/ejsk/.local/bin:$PATH"
+# Host-specific settings: hosts/<hostname>.sh in this repo, if present.
+DOTFILES_DIR="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
+[ -r "$DOTFILES_DIR/hosts/$(hostname -s).sh" ] && . "$DOTFILES_DIR/hosts/$(hostname -s).sh"
