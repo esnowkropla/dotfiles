@@ -2,3 +2,11 @@ emacs.d/session*
 emacs.d/auto-save-list
 emacs.d/games
 emacs.d/.lsp-session-v1
+bin/prod-db
+bin/staging-db
+bin/prod-dump
+bin/mongo-prod
+bin/readonly_db_creds
+bin/Cursor-*
+bin/mockery
+config/alacritty/alacritty.toml.*.bak

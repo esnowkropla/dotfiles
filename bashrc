@@ -97,11 +97,11 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 export EDITOR=vim
 export FLYCTL_INSTALL="/home/ejsk/.fly"
-export PATH="$ASDF_DATA_DIR/shims:$HOME/.local/maelstrom:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
-
-export HSA_OVERRIDE_GFX_VERSION=10.3.0
+export PATH="$(go env GOPATH)/bin:$HOME/.pulumi-bin:$ASDF_DATA_DIR/shims:$HOME/bin:$FLYCTL_INSTALL/bin:$HOME/.local/bin:$PATH"
 
 alias ds="df -h | grep home$ | tr -s ' ' | cut -d ' ' -f 4"
+
+alias ipm="ipython --pylab"
 
 alias pbcopy='xclip -selection clipboard -i'
 alias pbfilter='xclip -selection clipboard -f'
@@ -111,9 +111,4 @@ export PS1="${debian_chroot:+($debian_chroot)}\[${BLUE}\]\u@\h\[${NORMAL}\]:\[${
 
 . "$HOME/.cargo/env"
 
-# opencode
-export PATH=/home/ejsk/.opencode/bin:$PATH
-
-
-# Added by Antigravity CLI installer
-export PATH="/home/ejsk/.local/bin:$PATH"
+export GPG_TTY=$(tty)

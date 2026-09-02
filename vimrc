@@ -44,9 +44,9 @@ Plug 'chaimleib/vim-renpy'
 " Rust
 Plug 'rust-lang/rust.vim'
 
-" Crystal
-Plug 'vim-crystal/vim-crystal'
+" Devdocs
 
+Plug 'girishji/devdocs.vim'
 call plug#end()
 
 " Syntax highlighting and colour
@@ -82,8 +82,6 @@ let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 1
 let g:ale_completion_enabled = 1
 let g:ale_hover_to_preview = 1
-
-let g:ale_crystal_ameba_executable = '/usr/local/bin/ameba'
 
 " incsearch stuff
 map /  <Plug>(incsearch-forward)
@@ -128,12 +126,12 @@ set shiftwidth=2
 set softtabstop=2
 " display incomplete commands
 set showcmd
+set autoread
 
 set foldmethod=syntax
 set foldlevel=20
 
 autocmd BufNewFile,BufRead *.heex set syntax=eelixir
-autocmd BufNewFile,BufRead *.gleam set syntax=gleam
 autocmd FileType beancount setlocal shiftwidth=4 tabstop=4 softtabstop=4
 
 " My key mappings (many stolen from grb)
@@ -151,6 +149,8 @@ inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 cnoremap <expr> %% expand('%:h').'/'
+
+nnoremap <leader>w :DevdocsFind<CR>
 
 map <c-h> <c-w>h
 map <c-j> <c-w>j
@@ -228,6 +228,7 @@ vnoremap <Leader>e :<C-U>call Explain()<CR>
 nnoremap gj :ALENextWrap<cr>
 nnoremap gk :ALEPreviousWrap<cr>
 nnoremap g1 :ALEFirst<cr>
+nnoremap <Leader>r :ALEFindReferences<cr>
 
 " Test running
 function! MapCR()
@@ -242,7 +243,7 @@ function! RunTestFile(...)
         let command_suffix = ""
     endif
 
-    let in_test_file = match(expand("%"), '\(_test.rs\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\|_test.gleam\)$') != -1
+    let in_test_file = match(expand("%"), '\(_test.rs\|_spec.rb\|_test.rb\|test_.*\.py\|_test.py\|.test.ts\|_test.exs\|_spec.exs\|_test.go\)$') != -1
 
     if in_test_file
         call SetTestFile(command_suffix)
@@ -284,32 +285,34 @@ endfunction
 " nmap <silent> <C-w> <Plug>(ale_next_wrap)
 
 " Elixir
-let g:ale_elixir_elixir_ls_release=expand('~/work/elixir-ls/release')
 call ale#linter#Define('elixir', {
 \   'name': 'dexter',
 \   'lsp': 'stdio',
 \   'executable': 'dexter',
 \   'command': 'dexter lsp',
-\   'project_root': {buffer -> ale#path#FindNearestFile(buffer, 'mix.exs')      },
+\   'project_root': {buffer -> ale#path#FindNearestFile(buffer, 'mix.exs')},
 \})
 
+let g:ale_go_golangci_lint_package = 1
 let g:ale_linters = {
-\ 'elixir': ['mix', 'dexter'],
-\ 'python': ['flake8'],
+\ 'elixir': ['mix', 'credo', 'dexter'],
+\ 'python': ['flake8', 'pylsp', 'pyright'],
 \ 'bash': ['shellcheck'],
-\ 'javascript': ['standard'],
+\ 'javascript': ['eslint'],
+\ 'typescript': ['eslint', 'tsserver'],
 \ 'beancount': ['bean_check'],
 \ 'rust': ['cargo', 'analyzer'],
-\ 'gleam': ['gleamlsp']
+\ 'go': ['gopls', 'golangci-lint']
 \}
 
 let g:ale_fixers = {
 \ '*': ['remove_trailing_lines', 'trim_whitespace'],
 \ 'elixir': ['mix_format'],
-\ 'javascript': ['standard'],
+\ 'javascript': ['eslint', 'prettier'],
+\ 'typescript': ['eslint', 'prettier'],
 \ 'ruby': ['rubocop'],
 \ 'rust': ['rustfmt'],
 \ 'bash': ['shfmt'],
-\ 'gleam': ['gleam_format'],
-\ 'zig': ['zigfmt']
+\ 'go': ['gofmt'],
+\ 'python': ['black']
 \}
