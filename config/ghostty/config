@@ -9,5 +9,5 @@ gtk-titlebar = false
 # window-padding-y = 14
 background-opacity = 1.0
 
-# Shift+Return sends ESC CR, same as the alacritty binding
-keybind = shift+enter=text:\x1b\r
+window-inherit-working-directory = false
+working-directory = home

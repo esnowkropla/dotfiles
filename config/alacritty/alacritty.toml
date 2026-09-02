@@ -34,6 +34,13 @@ style = "Italic"
 family = "Berkeley Mono"
 style = "Regular"
 
+# Shift+Enter -> ESC CR, so Claude Code (and other TUI prompts) insert a newline
+# instead of submitting. Enter and Shift+Enter both send a bare carriage return --
+# the modifier isn't carried in the VT100 wire protocol -- so the meta-prefixed
+# form is the escape hatch. Written by Claude Code's /terminal-setup (see the
+# .bak backup alongside this file).
+#   https://code.claude.com/docs/en/terminal-config#enter-multiline-prompts
+#   https://blog.fsck.com/agent-blog/2026/02/26/terminal-keyboard-protocol/
 [[keyboard.bindings]]
 key = "Return"
 mods = "Shift"
